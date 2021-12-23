@@ -1,0 +1,31 @@
+{
+    "applinks": {
+        "apps": [],
+        "details": [
+            {
+                "appID": "F63U4TR39B.br.com.modalmais",
+                "paths": [
+                    "*"
+                ]
+            },
+            {
+                "appID": "F63U4TR39B.br.com.modalmais.hmg",
+                "paths": [
+                    "*"
+                ]
+            },
+            {
+                "appID": "F63U4TR39B.br.com.modalmais.premium",
+                "paths": [
+                    "open*"
+                ]
+            },
+            {
+                "appID": "F63U4TR39B.br.com.modalmais.premium.hmg",
+                "paths": [
+                    "*"
+                ]
+            }
+        ]
+    }
+}

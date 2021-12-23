@@ -1,0 +1,41 @@
+version: '3'
+
+services:
+  timework:
+    image: reegiss/timework:latest
+    container_name: timework
+    build:
+      context: ../frontend
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    networks:
+      - app-network
+
+  webserver:
+    depends_on:
+      - timework
+    image: nginx:1.15.12-alpine
+    container_name: webserver
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx-conf:/etc/nginx/conf.d
+      - ./certbot-etc:/etc/letsencrypt
+    networks:
+      - app-network
+  
+  certbot:
+    depends_on:
+      - webserver
+    image: certbot/certbot
+    container_name: certbot
+    volumes:
+      - ./certbot-etc:/etc/letsencrypt
+      - ./wordpress:/var/www/html
+    command: certonly --dry --webroot --webroot-path=/var/www/html --email regis@r3tecnologia.net --agree-tos --no-eff-email --force-renewal -d timework.me -d www.timework.me
+
+networks:
+  app-network:
+    driver: bridge 
